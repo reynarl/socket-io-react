@@ -14,10 +14,26 @@ app.use(express.static(__dirname + '/public'));
 //un dispositivo que se conectó
 io.on('connection', (socket) => {
   // console.log("cliente conectado");
-  socket.emit('mensaje-bienvenida', {
-    msg: 'Bienvenido al server',
-    date: new Date()
+  // socket.emit('mensaje-bienvenida', {
+  //   msg: 'Bienvenido al server',
+  //   date: new Date()
+  // })
+
+  // socket.on('mensaje-cliente', (msg) => {
+  //   console.log(msg);
+  // })
+
+  socket.on('mensaje-to-server', data => {
+    console.log(data);
+
+    // socket.emit('mensaje-from-server', data)
+
+    //cambiamos socket por io para emitir el mensaje para todos los que se encuentren en esa conexion
+    io.emit('mensaje-from-server', data)
+
   })
+
+
 });
 
 server.listen(3000, () => {
