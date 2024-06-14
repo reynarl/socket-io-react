@@ -28,6 +28,24 @@ class Sockets {
                 this.io.emit('current-bands', this.bandList.getBands())
             })
 
+            //evento para borrar banda
+            socket.on('delete-band', (id) => {
+                this.bandList.removeBand(id)
+                this.io.emit('current-bands', this.bandList.getBands())
+            })
+
+            //cambiar nombre
+            socket.on('change-name', ({ id, newName }) => {
+                this.bandList.changeName(id, newName)
+                this.io.emit('current-bands', this.bandList.getBands())
+            })
+
+            //Add bands
+            socket.on('add-band', (name) => {
+                this.bandList.addBand(name)
+                this.io.emit('current-bands', this.bandList.getBands())
+            })
+
         });
     }
 
