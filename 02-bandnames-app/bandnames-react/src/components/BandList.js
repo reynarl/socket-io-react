@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const BandList = ({ data, votar, deleteBand, changeName, addBand }) => {
+const BandList = ({ data, votar, deleteBand, changeName }) => {
   const [bands, setBands] = useState(data)
 
   useEffect(() => {

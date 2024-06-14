@@ -51,7 +51,7 @@ function App() {
 
   //agregar banda
   const addBand = (name) => {
-    socket.emit('add-band', name)
+    socket.emit('add-band', { name })
   }
 
   return (
