@@ -33,9 +33,25 @@ function App() {
     socket.on('current-bands', (bands) => setData(bands))
   }, [socket])
 
+  //emitir socket para incrementar votos
   const votar = (id) => {
     //emitimos el evento y como argumento mandamos el id
     socket.emit('add-vote', id)
+  }
+
+  //emitir socket para borrar una banda
+  const deleteBand = id => {
+    socket.emit('delete-band', id)
+  }
+
+  //cambiar nombre
+  const changeName = (id, newName) => {
+    socket.emit('change-name', { id, newName })
+  }
+
+  //agregar banda
+  const addBand = (name) => {
+    socket.emit('add-band', name)
   }
 
   return (
@@ -53,10 +69,16 @@ function App() {
         <h1>Band Names</h1>
         <div className='row'>
           <div className='col-12 col-md-8'>
-            <BandList data={data} votar={votar} />
+            <BandList
+              data={data}
+              votar={votar}
+              deleteBand={deleteBand}
+              changeName={changeName}
+              addBand={addBand}
+            />
           </div>
           <div className='col-12 col-md-4'>
-            <BandAdd />
+            <BandAdd addBand={addBand} />
           </div>
         </div>
       </div>

@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const BandAdd = () => {
+const BandAdd = ({ addBand }) => {
+
   return (
     <>
       <div>Agregar nueva banda</div>
-      <input placeholder='ingresar'></input>
+      <form>
+        <input placeholder='ingresar'></input>
+      </form>
     </>
 
   )

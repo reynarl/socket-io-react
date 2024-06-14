@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const BandList = ({ data, votar }) => {
+const BandList = ({ data, votar, deleteBand, changeName, addBand }) => {
   const [bands, setBands] = useState(data)
 
   useEffect(() => {
@@ -19,8 +19,8 @@ const BandList = ({ data, votar }) => {
   }
 
   const saveChanges = (id, name) => {
-    console.log(id + name);
     //Disparar el evento de socket
+    changeName(id, name)
   }
 
   return (
@@ -50,7 +50,7 @@ const BandList = ({ data, votar }) => {
                 </td>
                 <td><h3>{band.votes}</h3></td>
                 <td>
-                  <button className='btn btn-danger'>-1</button>
+                  <button className='btn btn-danger' onClick={() => deleteBand(band.id)}>Borrar</button>
                 </td>
               </tr>
             ))
