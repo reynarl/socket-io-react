@@ -1,33 +1,13 @@
-import io from 'socket.io-client'
+
 import { useEffect, useState } from 'react';
 
 import BandAdd from "./components/BandAdd";
 import BandList from "./components/BandList";
-
-const connectSocketServer = () => (
-  io.connect('http://localhost:8080', {
-    transports: ['websocket']
-  })
-)
+import { useSocket } from './hooks/useSocket';
 
 function App() {
-  const [socket] = useState(connectSocketServer)
-  const [online, setOnline] = useState(false)
   const [data, setData] = useState([])
-
-  useEffect(() => {
-    setOnline(socket.connected)
-  }, [socket])
-
-  useEffect(() => {
-    // cuando el socket se conecta
-    socket.on('connect', () => setOnline(true))
-  }, [socket])
-
-  useEffect(() => {
-    // cuando el socket se desconecta
-    socket.on('disconnect', () => setOnline(false))
-  }, [socket])
+  const { socket, online } = useSocket('http://localhost:8080')
 
   useEffect(() => {
     socket.on('current-bands', (bands) => setData(bands))
