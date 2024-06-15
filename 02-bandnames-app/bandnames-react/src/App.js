@@ -30,9 +30,9 @@ function App() {
   }
 
   //agregar banda
-  const addBand = (name) => {
-    socket.emit('add-band', { name })
-  }
+  // const addBand = (name) => {
+  //   socket.emit('add-band', { name })
+  // }
 
   return (
     <>
@@ -54,11 +54,10 @@ function App() {
               votar={votar}
               deleteBand={deleteBand}
               changeName={changeName}
-              addBand={addBand}
             />
           </div>
           <div className='col-12 col-md-4'>
-            <BandAdd addBand={addBand} />
+            <BandAdd />
           </div>
         </div>
       </div>
